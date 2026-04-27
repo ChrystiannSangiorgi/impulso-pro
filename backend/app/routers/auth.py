@@ -1,0 +1,65 @@
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
+from app.database import get_db
+from app.models.colaborador import ColaboradorUsuario
+from app.models.autenticacao import ColaboradorAutenticacao
+from app.schemas.auth import LoginRequest, TokenResponse
+from app.core.security import verify_password, create_access_token
+
+router = APIRouter(prefix="/auth", tags=["Autenticação"])
+
+@router.post("/login", response_model=TokenResponse)
+def login(request: LoginRequest, db: Session = Depends(get_db)):
+    # Busca o colaborador pelo e-mail
+    colaborador = db.query(ColaboradorUsuario).filter(
+        ColaboradorUsuario.Email == request.email
+    ).first()
+
+    # Verifica se o colaborador existe e está ativo
+    if not colaborador or not colaborador.Atividade:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciais inválidas."
+        )
+
+    # Busca os dados de autenticação
+    autenticacao = db.query(ColaboradorAutenticacao).filter(
+        ColaboradorAutenticacao.ID_Colaborador == colaborador.ID_Colaborador
+    ).first()
+
+    if not autenticacao:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciais inválidas."
+        )
+
+    # Verifica se a conta está bloqueada
+    if autenticacao.Conta_Bloqueada:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Conta bloqueada. Entre em contato com o administrador."
+        )
+
+    # Verifica a senha
+    if not verify_password(request.senha, autenticacao.Senha_Hash):
+        # Incrementa tentativas falhas
+        autenticacao.Tentativas_Falhas += 1
+        if autenticacao.Tentativas_Falhas >= 5:
+            autenticacao.Conta_Bloqueada = True
+        db.commit()
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Credenciais inválidas."
+        )
+
+    # Login bem sucedido — zera tentativas falhas
+    autenticacao.Tentativas_Falhas = 0
+    db.commit()
+
+    # Gera o token JWT
+    token = create_access_token(data={
+        "sub": str(colaborador.ID_Colaborador),
+        "email": colaborador.Email
+    })
+
+    return TokenResponse(access_token=token)
