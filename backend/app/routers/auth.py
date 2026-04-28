@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.colaborador import ColaboradorUsuario
 from app.models.autenticacao import ColaboradorAutenticacao
+from app.models.perfil import ColaboradorPerfil, Perfil
 from app.schemas.auth import LoginRequest, TokenResponse
 from app.core.security import verify_password, create_access_token
 
@@ -55,11 +56,24 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
     # Login bem sucedido — zera tentativas falhas
     autenticacao.Tentativas_Falhas = 0
     db.commit()
+    # Busca o perfil do colaborador
+    colaborador_perfil = db.query(ColaboradorPerfil).filter(
+        ColaboradorPerfil.ID_Colaborador == colaborador.ID_Colaborador
+    ).first()
 
-    # Gera o token JWT
+    nome_perfil = None
+    if colaborador_perfil:
+        perfil = db.query(Perfil).filter(
+            Perfil.ID_Perfil == colaborador_perfil.ID_Perfil
+        ).first()
+        nome_perfil = perfil.Nome_Perfil if perfil else None
+
+    # Gera o token JWT com perfil incluído
     token = create_access_token(data={
         "sub": str(colaborador.ID_Colaborador),
-        "email": colaborador.Email
+        "email": colaborador.Email,
+        "perfil": nome_perfil,
+        "nome": colaborador.Nome_Colaborador
     })
 
     return TokenResponse(access_token=token)
