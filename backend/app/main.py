@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import auth
+from app.routers import auth, perfil
 
 app = FastAPI(
     title="Impulso Pro API",
@@ -19,6 +19,7 @@ app.add_middleware(
 
 # Registra os routers
 app.include_router(auth.router)
+app.include_router(perfil.router)
 
 @app.get("/", tags=["Health Check"])
 def root():
