@@ -160,7 +160,7 @@ Toda a documentação formal está disponível na [Wiki do repositório](../../w
 
 | Documento | Descrição |
 |-----------|-----------|
-| [Project Charter](../../wiki/Project-Charter) | Visão, escopo, stakeholders e critérios de sucesso |
+| [Project Charter](Project‐Charter) | Visão, escopo, stakeholders e critérios de sucesso |
 | [Product Backlog](../../wiki/Product-Backlog) | 29 User Stories priorizadas com MoSCoW |
 | [Definition of Done](../../wiki/Definition-of-Done) | Critérios de qualidade para conclusão de stories |
 | [Sprint 01 — Planejamento](../../wiki/Sprint-01-Planejamento) | Objetivo, sprint backlog e tasks detalhadas |
