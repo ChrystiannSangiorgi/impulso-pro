@@ -3,7 +3,7 @@
 > Plataforma de gestão de treinamentos operacionais para redes de restaurantes.
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
-![Sprint](https://img.shields.io/badge/sprint-01-blue)
+![Sprint](https://img.shields.io/badge/sprint-02-blue)
 ![Stack](https://img.shields.io/badge/stack-FastAPI%20%7C%20React%20%7C%20MySQL-informational)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 
@@ -66,7 +66,7 @@ impulso-pro/
 │       ├── services/        # Comunicação com a API (axios)
 │       └── contexts/        # Contextos React (auth, perfil)
 ├── database/
-│   └── impulso_pro.sql      # Schema completo do banco
+│   └── Impulso_Pro.SQL      # Schema completo do banco
 └── docs/                    # Documentação do projeto
 ```
 
@@ -78,8 +78,8 @@ O banco de dados foi modelado com normalização até a **Terceira Forma Normal 
 
 Entidades principais: `Colaborador_Usuario`, `Restaurante`, `Treinamento`, `Trilha_Treinamento`, `Sessao_Equipe`, `Desempenho_Sessao`, `Presenca_Sessao`, `Perfil`, `Log_Auditoria`.
 
-📄 [Ver schema SQL completo](database/impulso_pro.sql)  
-📊 [Ver DER — Diagrama Entidade-Relacionamento](docs/der-impulso-pro.png)
+📄 [Ver schema SQL completo](https://github.com/ChrystiannSangiorgi/impulso-pro/blob/develop/database/Impulso_Pro.SQL)  
+📊 DER — Diagrama Entidade-Relacionamento disponível no repositório original: [Impulso\_Pro\_Projeto\_Banco\_De\_Dados](https://github.com/ChrystiannSangiorgi/Impulso_Pro_Projeto_Banco_De_Dados)
 
 ---
 
@@ -133,7 +133,7 @@ A documentação da API estará disponível em: `http://localhost:8000/docs`
 mysql -u root -p
 CREATE DATABASE impulso_pro;
 USE impulso_pro;
-source database/impulso_pro.sql;
+source database/Impulso_Pro.SQL;
 ```
 
 ### Frontend
@@ -156,14 +156,15 @@ npm run dev
 
 ## Documentação do Projeto
 
-Toda a documentação formal está disponível na [Wiki do repositório](../../wiki).
+Toda a documentação formal está disponível na [Wiki do repositório](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki).
 
 | Documento | Descrição |
 |-----------|-----------|
-| [Project Charter](../../wiki/Project-Charter) | Visão, escopo, stakeholders e critérios de sucesso |
-| [Product Backlog](../../wiki/Product-Backlog) | 29 User Stories priorizadas com MoSCoW |
-| [Definition of Done](../../wiki/Definition-of-Done) | Critérios de qualidade para conclusão de stories |
-| [Sprint 01 — Planejamento](../../wiki/Sprint-01-Planejamento) | Objetivo, sprint backlog e tasks detalhadas |
+| [Project Charter](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki/Project%E2%80%90Charter) | Visão, escopo, stakeholders e critérios de sucesso |
+| [Product Backlog](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki/Product%E2%80%90Backlog) | 29 User Stories priorizadas com MoSCoW |
+| [Definition of Done](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki/Definition%E2%80%90of%E2%80%90Done) | Critérios de qualidade para conclusão de stories |
+| [Sprint 01 — Planejamento](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki/Sprint%E2%80%9001%E2%80%90Planejamento) | Objetivo, sprint backlog, tasks e review |
+| [Sprint 02 — Planejamento](https://github.com/ChrystiannSangiorgi/impulso-pro/wiki/Sprint%E2%80%9002%E2%80%90Planejamento) | Colaboradores, importação CSV e perfil individual |
 
 ---
 
@@ -174,8 +175,8 @@ Toda a documentação formal está disponível na [Wiki do repositório](../../w
 | Fase | Status |
 |------|--------|
 | Planejamento e documentação | ✅ Concluído |
-| Sprint 01 — Fundação (Auth + Unidades) | 🔄 Em andamento |
-| Sprint 02 — Colaboradores e Importação | ⏳ Planejada |
+| Sprint 01 — Fundação (Auth + Unidades) | ✅ Concluído |
+| Sprint 02 — Colaboradores e Importação | 🔄 Em andamento |
 | Sprint 03 — Treinamentos e Trilhas | ⏳ Planejada |
 | Sprint 04 — Sessões e Presença | ⏳ Planejada |
 | Sprint 05 — Desempenho e Relatórios | ⏳ Planejada |
@@ -201,7 +202,7 @@ O Impulso Pro nasceu como trabalho acadêmico na disciplina de **Modelagem de Ba
 
 O repositório original com todos os artefatos acadêmicos — minimundo, DER, MER, verificação de formas normais e schema SQL — está disponível em:
 
-🔗 [Impulso_Pro_Projeto_Banco_De_Dados](https://github.com/ChrystiannSangiorgi/Impulso_Pro_Projeto_Banco_De_Dados)
+🔗 [Impulso\_Pro\_Projeto\_Banco\_De\_Dados](https://github.com/ChrystiannSangiorgi/Impulso_Pro_Projeto_Banco_De_Dados)
 
 Este repositório representa a **evolução do projeto** para uma aplicação full-stack real, com arquitetura de software, API REST, interface web e gestão ágil formal.
 
@@ -210,7 +211,7 @@ Este repositório representa a **evolução do projeto** para uma aplicação fu
 ## Autor
 
 **Chrystiann Caesar Sangiorgi de Oliveira**  
-Estudante de Ciência da Computação · 2º Semestre
+Estudante de Ciência da Computação · 3º Semestre
 
 [![GitHub](https://img.shields.io/badge/GitHub-ChrystiannSangiorgi-black?logo=github)](https://github.com/ChrystiannSangiorgi)
 
